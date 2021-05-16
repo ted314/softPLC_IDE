@@ -1,0 +1,179 @@
+﻿<Window x:Class="PLC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLC"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+        Title="MainWindow" Height="700" Width="1100">
+    <Window.Resources>
+        <ResourceDictionary>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    
+        <DockPanel Name="Whole">
+            <StatusBar DockPanel.Dock="Bottom" Background="LightBlue" Height="25">
+                <TextBox Text="状态栏"/>
+            </StatusBar>
+            <Grid DockPanel.Dock="Bottom" Height="150">
+                <Button>编译信息</Button>
+            </Grid>
+            <Menu DockPanel.Dock="Top" Height="20" Name="Menu">
+                <MenuItem Header="_Flie">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_Build">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_Communication">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_Transform">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_Windows">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_新建文件" />
+                    <MenuItem Header="_打开文件" />
+                </MenuItem>
+            </Menu>
+
+            <ToolBarTray DockPanel.Dock="Top" Height="40" Name="toolbar">
+            <ToolBar>
+                <Button Background="White">
+                    <Image Source="file.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="open.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="save.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="saveas.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="print.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="run.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="pause.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="stop.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="upload.png" Height="20"/>
+                </Button>
+                <Button Background="White">
+                    <Image Source="watch.png" Height="20"/>
+                </Button>
+            </ToolBar>
+            <ToolBar>
+                <Button Name="pointer" Background="Blue" Click="Tool_Choose">
+                    <Image Source="pointer.png" Height="30" Width="30"/>
+                </Button>
+                <Button Name="line_hor" Background="LightGray" Click="Tool_Choose">
+                    <Image Source="Toolhor.bmp" Height="30" Width="30"/>
+                </Button>
+                <Button Name="line_ver" Background="LightGray" Click="Tool_Choose">
+                    <Image Source="Toolver.bmp" Height="30" Width="30"/>
+                </Button>
+                <Button Name="trig_open" Background="LightGray" Click="Tool_Choose">
+                    <Image Source="ToolOTrig.bmp" Height="30" Width="30"/>
+                </Button>
+                <Button Name="trig_close" Background="LightGray" Click="Tool_Choose">
+                    <Image Source="ToolCTrig.bmp" Height="30" Width="30"/>
+                </Button>
+                <Button Name="coil_normal" Background="LightGray" Click="Tool_Choose">
+                    <Image Source="ToolCoil.bmp" Height="30" Width="30"/>
+                </Button>
+                <Button Name="blank_block" Background="LightGray" Click="Tool_Choose">
+                    <Image Source="blank.bmp" Height="30" Width="30"/>
+                </Button>
+            </ToolBar>
+            <ToolBar>
+                <Button Content="LD_to_AOV" Click="AOV_Clicked"/>
+                <Button Content="AOV_IL" Click="Tree_Clicked"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid DockPanel.Dock="Top" Height="Auto" Name="editing">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <TreeView Grid.Column="0">
+                <TreeViewItem Header="Lines">
+                    <TreeViewItem Header="Pointer"/>
+                    <TreeViewItem Header="Line1"/>
+                    <TreeViewItem Header="Line2"/>
+                    <TreeViewItem Header="Line3"/>
+                    <TreeViewItem Header="Line4"/>
+                    <TreeViewItem Header="Line5"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Triggers">
+                    <TreeViewItem Header="Pointer"/>
+                    <TreeViewItem Header="Trig1"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Output">
+                    <TreeViewItem Header="Pointer"/>
+                    <TreeViewItem Header="Output1"/>
+                </TreeViewItem>
+            </TreeView>
+
+            <GridSplitter Width="3"/>
+
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Name="LDScroll">
+                <TabControl>
+                    <TabItem Header="梯形图">
+                        <UniformGrid Rows="20" Columns="10" Name="LDgraph" Height="1100" Width="700" Background="White"/>
+                    </TabItem>
+                    <TabItem Header="IL指令表">
+                        <TextBox Name="IL_TextBox" FontSize="20" Text="暂无IL指令"/>
+                    </TabItem>
+                    <TabItem Header="C程序">
+                        <Button>C语言程序显示区
+                        </Button>
+                    </TabItem>
+                </TabControl>
+            </ScrollViewer>
+
+            <GridSplitter Width="3"/>
+
+            <TreeView Grid.Column="2">
+                <TreeViewItem Header="项目一">
+                    <TreeViewItem Header="底层操作库"/>
+                    <TreeViewItem Header="RTOS"/>
+                    <TreeViewItem Header="PLC程序">
+                        <TreeViewItem Header="Program1"/>
+                        <TreeViewItem Header="Program2"/>
+                        <TreeViewItem Header="Program3"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+        </Grid>
+    </DockPanel>
+    
+</Window>
